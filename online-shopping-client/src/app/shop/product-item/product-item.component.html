@@ -1,6 +1,20 @@
 <div *ngIf="productItem" class="card shadow-sm h-100">
-    <img src="{{productItem.pictureUrl}}" alt={{productItem.name}} class="img-fluid 
-    bg-light">
+    <div class="image position-relative" style="cursor: pointer;">
+        <img src="{{productItem.pictureUrl}}" alt={{productItem.name}} 
+            class="img-fluid bg-light">
+        <div class="d-flex align-items-center justify-content-around hover-overlay">
+            <button class="btn btn-primary fa fa-shopping-cart me-2"></button>
+            <button routerLink="/shop/{{productItem.id}}" class="btn btn-primary">
+                View
+            </button>
+            <!--or-->
+            <!-- <button [routerLink]="['/shop', productItem.id]"
+            type="button" class="btn btn-sm btn-outline-secondary">
+                View
+            </button> -->
+        </div>
+    </div>
+
     <div class="card-body d-flex flex-column">
         <a href="" class="text-decoration-none">
             <h6 class="text-uppercase">
@@ -9,21 +23,5 @@
         </a>
 
         <span class="mb-2">{{productItem.price | currency}}</span>
-
-        <div class="btn-group mt-auto">
-            <button type="button" class="btn btn-sm btn-outline-secondary
-            fa fa-shopping-cart me-2"></button>
-            <button [routerLink]="['/shop', productItem.id]"
-            routerLink="/shop/{{productItem.id}}"
-            type="button" class="btn btn-sm btn-outline-secondary">
-                View
-            </button>
-            <!--or-->
-            <!-- <button [routerLink]="['/shop', productItem.id]"
-            routerLink="/shop/{{productItem.id}}"
-            type="button" class="btn btn-sm btn-outline-secondary">
-                View
-            </button> -->
-        </div>
     </div>
 </div>
