@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using online_shopping_api.Errors;
 
@@ -9,7 +10,14 @@ namespace online_shopping_api.Controllers
         private readonly StoreContext _context;
         public BuggyController(StoreContext context) {
             _context = context;
-        }    
+        }
+
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretText()
+        {
+            return "secret stuff";
+        }
 
         [HttpGet("notfound")]
         public ActionResult GetNotFoundRequest()       
