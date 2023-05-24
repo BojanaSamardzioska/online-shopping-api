@@ -13,6 +13,8 @@ namespace online_shopping_api.Helpers
                 .ForMember(t => t.ProductType, o => o.MapFrom(s => s.ProductType.Name))
                 .ForMember(p => p.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
             CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemDto, BasketItem>();
         }   
     }
 }
