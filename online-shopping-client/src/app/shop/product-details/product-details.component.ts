@@ -31,20 +31,22 @@ export class ProductDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if(id) {
       this.shopService.getProduct(+id).subscribe({
-        next: response => {
+        next: (response: Product | undefined) => {
           this.product = response;
-          this.bcService.set('@productDetails', this.product.name);
-          this.basketService.basketSource$.pipe(take(1)).subscribe({
-            next: basket => {
-              const item = basket?.items.find(x => x.id === +id);
-              if(item) {
-                this.quantity = item.quantity;
-                this.quantityInBasket = item.quantity;
+          if(this.product) {
+            this.bcService.set('@productDetails', this.product.name);
+            this.basketService.basketSource$.pipe(take(1)).subscribe({
+              next: basket => {
+                const item = basket?.items.find(x => x.id === +id);
+                if(item) {
+                  this.quantity = item.quantity;
+                  this.quantityInBasket = item.quantity;
+                }
               }
-            }
-          })
+            })
+          }
         },
-        error: error => console.log(error)
+        error: (error: any) => console.log(error)
       });  
     }
   }
