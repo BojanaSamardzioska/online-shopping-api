@@ -24,6 +24,7 @@ namespace online_shopping_api.Extensions
                 return ConnectionMultiplexer.Connect(options);
             });
 
+            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IPaymentService, PaymentService>();
